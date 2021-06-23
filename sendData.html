@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <title>Send data to the web server</title>
+    <h2>
+      Hobman's reptiles
+    </h2>
+    {% block content %}
+    <h1>Create new reptile.</h1>
+    <form action="" method="post" novalidate enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.snakeName.label }}<br>
+            {{ form.snakeName(size=32) }}
+        </p>
+        <p>
+            {{ form.snakeType.label }}<br>
+            {{ form.snakeType(size=32) }}
+        </p>
+        <p>{{ form.snakeDescription.label}}<br>
+          {{ form.snakeDescription(size=32) }}</p>
+          <p>{{ form.snakeImage}}<br>
+          </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+      <a href = "{{ url_for('home') }}">
+        Click here to return to the home page.
+      </a>
+  </head>
+  <body>
+
+  </body>
+</html>

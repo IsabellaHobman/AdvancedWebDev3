@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <title>Delete things</title>
+    <h2>
+      Hobman's reptiles
+    </h2>
+  </head>
+  <body>
+    {% block content %}
+    <h1>Delete reptiles from the database. This can't be undone!</h1>
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+        {{form.reptileID.label}}
+        {{ form.reptileID(size=32) }}
+      </p> 
+      <p>
+        {{form.submit()}}
+      </p>
+    </form>
+    {% endblock %}
+
+    <a href = "{{ url_for('home') }}">
+      Click here to return to the home page.
+    </a>
+  </body>
+</html>

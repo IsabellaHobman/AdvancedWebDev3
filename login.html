@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <title>Delete things</title>
+    <h2>
+      Hobman's reptiles
+    </h2>
+  </head>
+  {% block content %}
+  <h1>Sign In</h1>
+  <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+        <p>
+            {{ form.userName.label }}<br>
+            {{ form.userName(size=32) }}
+        </p>
+        <p>
+            {{ form.passWord.label }}<br>
+            {{ form.passWord(size=32) }}
+        </p>
+    <p>{{ form.submitt() }}</p>
+  </form>
+  <hr>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+{% endblock %}
+  <body>
+    <a href = "{{ url_for('home') }}">
+      Click here to return to the home page.
+    </a>
+
+  </body>
+</html>

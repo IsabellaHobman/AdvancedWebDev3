@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <title>Welcome to the test zone</title>
+  </head>
+  <body>
+    <h2>
+      Hobman's reptiles
+    </h2>
+    {% block content %}
+    <h1>Get data from database</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+          <p>
+              {{ form.reptileName.label }}<br>
+              {{ form.reptileName(size=32) }}
+          </p>
+      <p>{{ form.submit() }}</p>
+    </form>
+    {% with messages = get_flashed_messages() %} <! -- This just shows flashed messages. This is where the user is most likely to return, after all.-->
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+      <div id = "trial"></div>
+      <script>
+      deliverData();
+      function deliverData () {
+      if ('{{data}}'){
+      let reptileData =  JSON.parse('{{ data|safe }}');
+      console.log(reptileData);
+      var myImage = new Image(500, 500);
+      path = JSON.stringify(reptileData[0].pathToImage );
+      path = path.slice(1, -1);
+      myImage.src = "/static/images/" + path; // This is complicated. Because of the way JSON works, I need to string it before using it.
+      document.getElementById("trial").innerHTML = "This is a " + JSON.stringify(reptileData[0].reptileName).slice(1, -1) + " ,Which is a type of " + JSON.stringify(reptileData[0].reptileType).slice(1, -1) + ". Here is some facts about them : " + JSON.stringify(reptileData[0].reptileDescription).slice(1, -1);
+      var br = document.createElement("br"); // If I want anything other than Object object.
+      document.getElementById("trial").appendChild(br);
+      document.getElementById("trial").appendChild(myImage);
+    }
+    }
+      </script>
+
+      <a href = "{{ url_for('home') }}">
+        Click here to return to the home page.
+      </a>
+  </body>
+</html>
